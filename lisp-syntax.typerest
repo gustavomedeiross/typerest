@@ -1,0 +1,12 @@
+(PUT /api/v2/sample/{id:string}
+    (request
+        (body
+            (:userId :string)))
+    (responses
+        (201
+            (:id :string
+             :userId :string
+             :requiredPortability :boolean))
+        (401 (:code UNAUTHORIZED :message string))
+        (409 (:code SOME_ERROR :message string))
+        (422 (:code USER_NOT_FOUND :message string))))

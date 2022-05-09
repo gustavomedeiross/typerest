@@ -1,0 +1,58 @@
+scalar DateTime = String
+
+PUT /api/v2/sample/{id:String} {
+    request {
+        body {
+            userId: String
+        }
+    }
+
+    type SomeType = {
+        id: String
+        userId: String
+        flag: Boolean
+    }
+
+    type OtherType = {
+        id: String
+        userId: Integer
+        createdAt: DateTime
+    }
+
+    type AnotherType = {
+        hello: String
+        world: Integer
+    }
+
+    type Bla =
+        | Some (SomeType)
+        | Other (OtherType)
+        | Another (AnotherType)
+
+    responses {
+        200: {
+            id: String
+            userId: String
+        }
+
+        201:
+            | Normal (NormalType)
+            | Other (OtherType)
+            | Another (AnotherType)
+
+        401: {
+            code: UNAUTHORIZED
+            message: String
+        }
+
+        409: {
+            code: SOME_ERROR
+            message: String
+        }
+
+        422: {
+            code: USER_NOT_FOUND
+            message: String
+        }
+    }
+}

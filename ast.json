@@ -1,0 +1,218 @@
+{
+    "typeDefs": [
+      {
+        "kind": "OBJECT",
+        "name": "Post",
+        "description": null,
+        "fields": [
+          {
+            "kind": "FIELD",
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "TYPE",
+              "type": "String"
+            }
+          }
+        ]
+      }
+    ],
+    "routes": [
+      {
+        "route": {
+          "uri": "/api/v2/sample/{id}/",
+          "parameters": [
+            {
+              "name": "id",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "request": {
+          "body": {
+            "kind": "OBJECT",
+            "name": null,
+            "description": null,
+            "fields": [
+              {
+                "kind": "FIELD", // is this field required?
+                "name": "userId",
+                "description": null,
+                // I think that using "type": "String" directly could have
+                // some problems if the type is nested (eg: `userId: { something: String }`)
+                // so I think this is the best solution
+                "type": {
+                  "kind": "TYPE", // maybe "SCALAR"?
+                  "type": "String"
+                }
+              }
+            ]
+          }
+        },
+        "typeDefs": [
+          {
+            "kind": "OBJECT",
+            "name": "SomeType",
+            "description": null,
+            "fields": [
+              {
+                "kind": "FIELD",
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "TYPE",
+                  "type": "String"
+                }
+              },
+              {
+                "kind": "FIELD",
+                "name": "userId",
+                "description": null,
+                "type": {
+                  "kind": "TYPE",
+                  "type": "String"
+                }
+              },
+              {
+                "kind": "FIELD",
+                "name": "flag",
+                "description": null,
+                "type": {
+                  "kind": "TYPE",
+                  "type": "Boolean"
+                }
+              }
+            ]
+          },
+          {
+            "kind": "OBJECT",
+            "name": "OtherType",
+            "description": null,
+            "fields": [
+              {
+                "kind": "FIELD",
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "TYPE",
+                  "type": "String"
+                }
+              },
+              {
+                "kind": "FIELD",
+                "name": "userId",
+                "description": null,
+                "type": {
+                  "kind": "TYPE",
+                  "type": "String"
+                }
+              },
+              {
+                "kind": "FIELD",
+                "name": "createdAt",
+                "description": null,
+                "type": {
+                  "kind": "TYPE",
+                  "type": "DateTime"
+                }
+              }
+            ]
+          },
+          {
+            "kind": "OBJECT",
+            "name": "AnotherType",
+            "description": null,
+            "fields": [
+              {
+                "kind": "FIELD",
+                "name": "hello",
+                "description": null,
+                "type": {
+                  "kind": "TYPE",
+                  "type": "String"
+                }
+              },
+              {
+                "kind": "FIELD",
+                "name": "world",
+                "description": null,
+                "type": {
+                  "kind": "TYPE",
+                  "type": "Integer"
+                }
+              }
+            ]
+          },
+          {
+            "kind": "UNION",
+            "name": "Bla",
+            "description": null,
+            "of": [
+              {
+                "kind": "UNIONTAG",
+                "name": "Some",
+                "type": {
+                  "kind": "TYPE",
+                  "type": "SomeType"
+                }
+              },
+              {
+                "kind": "UNIONTAG",
+                "name": "Other",
+                "type": {
+                  "kind": "TYPE",
+                  "type": "OtherType"
+                }
+              },
+              {
+                "kind": "UNIONTAG",
+                "name": "Another",
+                "type": {
+                  "kind": "TYPE",
+                  "type": "AnotherType"
+                }
+              }
+            ]
+          }
+        ],
+        // TODO: this is missing the pattern matchable piece,
+        // maybe just "UNION" is not enough
+        "responses": {
+          "kind": "UNION",
+          "of": [
+            {
+              "kind": "STATUS",
+              "code": "200",
+              "name": "Ok",
+              "data": {
+                "kind": "TYPE",
+                "type": "Post"
+              }
+            },
+            {
+              "kind": "STATUS",
+              "code": "400",
+              "name": "BadRequest",
+              "data": {
+                "kind": "OBJECT",
+                "name": "Post",
+                "description": null,
+                "fields": [
+                  {
+                    "kind": "FIELD",
+                    "name": "reason",
+                    "description": null,
+                    "type": {
+                      "kind": "ENUM",
+                      "of": 
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+}

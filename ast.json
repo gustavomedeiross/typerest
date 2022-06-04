@@ -10,6 +10,8 @@
             "name": "title",
             "description": null,
             "type": {
+              // TODO: perhaps we should use "SCALAR" instead of "TYPE",
+              // because "String/Integer/Boolean,etc" are primitive leaf values
               "kind": "TYPE",
               "type": "String"
             }
@@ -24,7 +26,7 @@
           "parameters": [
             {
               "name": "id",
-              "type": "string"
+              "type": "String"
             }
           ]
         },
@@ -36,11 +38,11 @@
             "description": null,
             "fields": [
               {
-                "kind": "FIELD", // is this field required?
+                "kind": "FIELD", // should this field be required in this case?
                 "name": "userId",
                 "description": null,
                 // I think that using "type": "String" directly could have
-                // some problems if the type is nested (eg: `userId: { something: String }`)
+                // some problems if the type is nested (e.g.: `userId: { something: String }`)
                 // so I think this is the best solution
                 "type": {
                   "kind": "TYPE", // maybe "SCALAR"?

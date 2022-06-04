@@ -1,5 +1,4 @@
-// I don't know if this is a good idea
-scalar DateTime = String
+scalar DateTime
 
 type Post = {
     title: String

@@ -1,7 +1,12 @@
-(PUT /api/v2/sample/{id:string}
+(scalar DateTime)
+
+(type Post
+    (:title String))
+    
+(PUT /api/v2/sample/{id:String}
     (request
         (body
-            (:userId :string)))
+            (:userId String)))
 
     (type SomeType
         (:id String
